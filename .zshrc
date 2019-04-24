@@ -136,7 +136,39 @@ alias op='xdg-open'
 # tetris
 alias tetris='bastet'
 
+# lsd instead of ls
+alias ls='lsd'
+
 eval $(thefuck --alias)
 
 
 . /home/felix/torch-cl/install/bin/torch-activate
+source /home/felix/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+
+
+######### FZF #############
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Auto preview
+#export FZF_DEFAULT_OPTS='--preview "pygmentize {}" --color light --margin 5,20'
+
+
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  local out file key
+  IFS=$'\n' out=($(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e))
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
+##### Rust
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"

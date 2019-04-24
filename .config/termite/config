@@ -8,7 +8,7 @@ cursor_blink = system
 cursor_shape = block
 dynamic_title = true
 filter_unmatched_urls = true
-font = Monospace 10
+font = Ubuntu Mono 12
 icon_name = terminal
 modify_other_keys = false
 mouse_autohide = false
@@ -33,7 +33,6 @@ highlight = #30343e
 [colors]
 foreground = #d8dee8
 #background = #2f343f
-#background = rgba(47, 52, 63, 0.95)
 background = rgba(47, 52, 63, 0.96)
 foreground_bold = #d0d6e0
 cursor = #b48ead

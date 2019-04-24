@@ -10,6 +10,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'racer-rust/vim-racer'
+Plugin 'rakr/vim-two-firewatch'
+Plugin 'simnalamburt/vim-mundo'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -26,15 +29,18 @@ call vundle#end()            " required
 " Put your non-Plugin stuff after this line
 
 filetype plugin indent on    " required
+" Enable persistent undo so that undo history persists across vim sessions
+
 " Syntax and color
 syntax enable
 set background=dark
+colors Dim
 let g:color_coded_enabled = 1
 
 " Tabbing and indentation
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set backspace=2
 
@@ -95,13 +101,16 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
 
 """"""""""""""""""""""""""""""""
 " RustFmt
-
+let g:rustfmt_command = 'rustup run stable rustfmt'
+"let g:rustfmt_autosave = 1
 autocmd FileType rust nnoremap <buffer><Leader>f :<C-u>RustFmt<CR>
 autocmd FileType rust vnoremap <buffer><Leader>f :RustFmt<CR>
 
+set hidden
+let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_experimental_completer = 1
+
 """"""""""""""""""""""""""""""""
-
-
 
 " Trailing whitespace highlighting
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -154,6 +163,13 @@ endfunction
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
+""" Mundo (undo tree)
+nnoremap <Leader>u :MundoToggle<CR>
+
+set undofile
+set undodir=~/.vim/undo
+
+
 """""""""""""""""""
 " Airline
 let g:airline_theme='bubblegum'
@@ -161,3 +177,13 @@ let g:airline_theme='bubblegum'
 "let g:airline_theme='zenburn'
 "let g:airline_theme='vice'
 "let g:airline_theme='hybridline'
+
+
+"""""""""""""""""""""
+" Move through screen lines
+nnoremap j gj
+nnoremap k gk
+" Wrap on window break
+set wrap linebreak nolist
+
+set rtp+=~/.fzf
