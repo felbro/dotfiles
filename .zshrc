@@ -79,6 +79,8 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='mvim'
  fi
 
+export TERM=xterm-256color
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -147,7 +149,7 @@ source /home/felix/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 
-
+TZ='America/Los_Angeles'; export TZ
 ######### FZF #############
 
 
@@ -172,3 +174,10 @@ fo() {
 
 ##### Rust
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+
+
+## ALSO USE:
+# zsh-syntax-highlighting
+# lsd instead of ls
+# ...
